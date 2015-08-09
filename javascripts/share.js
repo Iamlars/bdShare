@@ -150,6 +150,10 @@
         }
     };
 
+    window.Share = function(){
+        return Share();
+    }
+
 }(window.jQuery));
 
 
