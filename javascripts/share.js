@@ -10,7 +10,7 @@
 ;
 (function($) {
 
-    function Share(uid) {
+    function Share(uid,options) {
 
         /**
          * 初始化分享
@@ -23,10 +23,21 @@
             return new Share();
         }
 
+
         this.uid = uid;
         this.url = 'http://s.share.baidu.com/';
         this.title = document.title;
         this.size = 'height=500,width=700,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no';
+        this.render = document.createElement('canvas').getContext('2d') ? 'canvas' : 'table';
+        this.options = $.extend( {}, {
+            render: this.render,
+            width: 120,
+            height: 120,
+            background: "#fff",
+            foreground: "#000",
+            text:''
+        }, options);
+        this.isLoad = false;
 
         this.init();
     }
@@ -41,12 +52,35 @@
                 var _self = $(this),
                     type = _self.data('type'),
                     data = _self.parent('.share-list').data();
-                that.fire(type, data);
-            });
+                that.fire(type, data,_self);
+            }).append($('<div id="J_qr_code_share"></div>'));
+
+
+
+
         },
-        fire: function (t, d) {
-            var query = this.set(t, d);
+        fire: function (t, d,self) {
+            var that = this,
+                query = that.set(t, d);
             this.load(query);
+
+            if(t === 'weixin'){
+
+                if(!that.isLoad){
+                    var qrcode = document.createElement('script');
+                    qrcode.src = 'javascripts/jquery.qrcode.min.js';
+                    document.head.appendChild(qrcode);
+                    that.isLoad = true;
+                    qrcode.onload = function(){
+                        that.renderQrCode(self);
+                    };
+                }
+
+                that.renderQrCode(self);
+
+                return;
+            }
+
             this.open(query);
         },
 
@@ -78,6 +112,7 @@
             query.apiType = 0;
             query.buttonType = 0;
 
+            this.options.text = query.url;
             return '?' + $.param(query);
         },
 
@@ -129,9 +164,16 @@
          *
          */
         _formatTitle: function (text) {
-            return text ? encodeURIComponent(text.substring(0, 300)) : this.title;
+            return text ? encodeURIComponent(text.substr(0, 300)) : this.title;
         },
 
+        renderQrCode: function(self){
+            var that = this;
+            $('#J_qr_code_share').empty().qrcode(that.options).css({
+                top: self.offset().top - that.options.height - 20,
+                left:  self.offset().left - that.options.width/2 + 30
+            }).show();
+        },
         /**
          * 算法来自 今日头条 没看懂
          * str '0123456789abcdefghijklmnopqrstuvwxyz'
