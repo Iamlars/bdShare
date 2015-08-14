@@ -5,5 +5,4 @@
 
 用我啊，我可以搞定！
 
-
-[预览地址](http://htmlpreview.github.io/?https://github.com/Iamlars/bdShare/blob/master/share.html)
+下载demo不要直接双击啊各位亲，打不开的打不开的打不开。
