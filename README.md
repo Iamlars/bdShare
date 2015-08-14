@@ -6,4 +6,4 @@
 用我啊，我可以搞定！
 
 
-[预览地址](http://htmlpreview.github.io/?https://github.com/Iamlars/bdShare/master/index.html)
+[预览地址](http://htmlpreview.github.io/?https://github.com/Iamlars/bdShare/blob/master/share.html)
