@@ -4,3 +4,6 @@
 不想复杂的去配置分享接口？
 
 用我啊，我可以搞定！
+
+
+[预览地址](http://htmlpreview.github.io/?https://github.com/Iamlars/bdShare/master/index.html)
