@@ -28,7 +28,7 @@
         this.url = 'http://s.share.baidu.com/';
         this.title = document.title;
         this.size = 'height=500,width=700,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no';
-        this.render = document.createElement('canvas').getContext('2d') ? 'canvas' : 'table';
+        this.render = document.createElement('canvas').getContext() ? 'canvas' : 'table';
         this.options = $.extend( {}, {
             render: this.render,
             width: 120,
