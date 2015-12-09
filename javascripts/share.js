@@ -94,17 +94,17 @@
         set: function (type, data) {
             var query = {};
             query.click = 1;
-            query.url = encodeURIComponent(data.url || "");
+            query.url = data.url || "";
             query.uid = this.uid;
             query.to = type;
             query.type = "text";
             query.relateUid = data.wbuid || "";
-            query.pic = encodeURIComponent(data.pic || "");
+            query.pic = data.pic || "";
             query.title = this._formatTitle(data.text);
             query.key = "";
             query.sign = "on";
-            query.desc = encodeURIComponent(data.desc || "");
-            query.comment = encodeURIComponent(data.comment || "");
+            query.desc = data.desc || "";
+            query.comment = data.comment || "";
             query.searchPic = 0;
             query.l = this.time();
             query.linkid = this.string();
